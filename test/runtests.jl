@@ -1,6 +1,7 @@
 using BEA, DataFrames
 using Test: Test, @testset, @test, @test_throws
-
+using Documenter
+API_BEA = ENV["API_BEA_TOKEN"]
 # Examples
 datasets = bea_api_datasets(API_BEA)
 
@@ -46,7 +47,7 @@ end
         [2011, 2012],
         seriesid = 4:5,
         country = 202)
-    x = bea_api_data(API_BEA, query) # Not working
+    x = bea_api_data(API_BEA, query)
     @test parse.(Int, sort!(unique(x[!,:Year]))) == 2011:2012
     sleep(0.5)
     query = GDPbyIndustry(
@@ -72,10 +73,7 @@ end
     x = bea_api_data(API_BEA, query)
     @test parse(Int, minimum(x[!,:Year])) == 2003
     sleep(0.5)
-    query = InputOutput(
-        tableid = 56,
-        year = 2010:2013
-        )
+    query = InputOutput(56, 2010:2013)
     x = bea_api_data(API_BEA, query)
     @test parse(Int, minimum(x[!,:Year])) == 2010
     sleep(0.5)

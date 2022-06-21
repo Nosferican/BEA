@@ -32,7 +32,7 @@ function preprocess_frequency(f::AbstractVector{Char})
                 "annual, quarterly, and monthly. ",
                 "Some datasets use 'S' and 'N' for quarterly seasonally-adjusted or not."))
             )
-    join(sort!(get.(Ref(FREQUENCIES), f, f)), ',')
+    join(sort!(get.(Ref(FREQUENCIES), f, string.(f))), ',')
 end
 
 function preprocess_year(yr::Char)

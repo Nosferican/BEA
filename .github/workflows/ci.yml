@@ -51,4 +51,5 @@ jobs:
       - uses: julia-actions/julia-docdeploy@v1
         env:
           API_BEA_TOKEN: ${{ secrets.API_BEA_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           COLUMNS: '200'

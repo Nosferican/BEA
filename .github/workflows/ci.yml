@@ -51,5 +51,4 @@ jobs:
       - uses: julia-actions/julia-docdeploy@v1
         env:
           API_BEA_TOKEN: ${{ secrets.API_BEA_TOKEN }}
-        env:
           COLUMNS: '200'

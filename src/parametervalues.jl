@@ -1,0 +1,136 @@
+"""
+    bea_api_parametervalues(
+        BEA_token::AbstractString,
+        DatasetName::AbstractString,
+        ParameterName::AbstractString;
+        kwargs...) -> DataFrame
+
+Retrieves a list of the valid values for a particular parameter.
+
+# Examples
+
+```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
+julia> bea_api_parametervalues(BEA_token, "Regional", "TableName")
+99×2 DataFrame
+ Row │ Key       Desc
+     │ String    String
+─────┼─────────────────────────────────────────────
+   1 │ CAEMP25N  Total Full-Time and Part-Time Em…
+   2 │ CAEMP25S  Total Full-Time and Part-Time Em…
+   3 │ CAGDP1    Gross Domestic Product (GDP) sum…
+   4 │ CAGDP11   Contributions to percent change …
+   5 │ CAGDP2    Gross domestic product (GDP) by …
+   6 │ CAGDP8    Chain-type quantity indexes for …
+   7 │ CAGDP9    Real GDP by county and metropoli…
+   8 │ CAINC1    Personal Income Summary: Persona…
+   9 │ CAINC30   Economic Profile (Non-Industry)
+  10 │ CAINC35   Personal Current Transfer Receip…
+  11 │ CAINC4    Personal Income and Employment b…
+  ⋮  │    ⋮                      ⋮
+  90 │ SQINC35   Personal Current Transfer Receip…
+  91 │ SQINC4    Personal Income by Major Compone…
+  92 │ SQINC5H   Personal Income by Major Compone…
+  93 │ SQINC5N   Personal Income by Major Compone…
+  94 │ SQINC5S   Personal Income by Major Compone…
+  95 │ SQINC6N   Compensation of Employees by NAI…
+  96 │ SQINC6S   Compensation of Employees by SIC…
+  97 │ SQINC7H   Wages and Salaries by Industry (…
+  98 │ SQINC7N   Wages and Salaries by NAICS Indu…
+  99 │ SQINC7S   Wages and Salaries by SIC Indust…
+                                    78 rows omitted
+```
+
+```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
+julia> bea_api_parametervalues(BEA_token, "MNE", "Country")
+259×2 DataFrame
+ Row │ key     desc
+     │ String  String
+─────┼──────────────────────────────
+   1 │ all      all
+   2 │ 000      all Countries Total
+   3 │ 600     Afghanistan
+   4 │ 499     Africa
+   5 │ 350     Albania
+   6 │ 400     Algeria
+   7 │ 300     Andorra
+   8 │ 401     Angola
+   9 │ 272     Anguilla
+  10 │ 273     Antigua and Barbuda
+  11 │ 200     Argentina
+  ⋮  │   ⋮              ⋮
+ 250 │ 653     Vietnam
+ 251 │ 440     Western Sahara
+ 252 │ 637     Western Samoa
+ 253 │ 514     Yemen
+ 254 │ 500     Yemen (Aden)
+ 255 │ 514     Yemen (Sanaa)
+ 256 │ 328     Yugoslavia
+ 257 │ 408     Zaire
+ 258 │ 448     Zambia
+ 259 │ 431     Zimbabwe
+                    238 rows omitted
+```
+
+```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
+julia> bea_api_parametervalues(BEA_token, "Regional", "LineCode", TableName = "SQINC7N", Year = 2020)
+29×2 DataFrame
+ Row │ Key     Desc
+     │ String  String
+─────┼───────────────────────────────────────────
+   1 │ 100     [SQINC7N] Private wages and sala…
+   2 │ 1000    [SQINC7N] Private nonfarm wages …
+   3 │ 1100    [SQINC7N] Private nonfarm wages …
+   4 │ 1200    [SQINC7N] Private nonfarm wages …
+   5 │ 1300    [SQINC7N] Private nonfarm wages …
+   6 │ 1400    [SQINC7N] Private nonfarm wages …
+   7 │ 1500    [SQINC7N] Private nonfarm wages …
+   8 │ 1600    [SQINC7N] Private nonfarm wages …
+   9 │ 1700    [SQINC7N] Private nonfarm wages …
+  10 │ 1800    [SQINC7N] Private nonfarm wages …
+  11 │ 1900    [SQINC7N] Private nonfarm wages …
+  ⋮  │   ⋮                     ⋮
+  20 │ 500     [SQINC7N] Private nonfarm wages …
+  21 │ 510     [SQINC7N] Private nonfarm wages …
+  22 │ 530     [SQINC7N] Private nonfarm wages …
+  23 │ 600     [SQINC7N] Private nonfarm wages …
+  24 │ 700     [SQINC7N] Private nonfarm wages …
+  25 │ 800     [SQINC7N] Private nonfarm wages …
+  26 │ 81      [SQINC7N] Farm wages and salarie…
+  27 │ 82      [SQINC7N] Nonfarm wages and sala…
+  28 │ 90      [SQINC7N] Private nonfarm wages …
+  29 │ 900     [SQINC7N] Private nonfarm wages …
+                                   8 rows omitted
+```
+"""
+function bea_api_parametervalues(
+    BEA_token::AbstractString,
+    DatasetName::AbstractString,
+    ParameterName::AbstractString;
+    kwargs...) :: DataFrame
+    basic = isempty(kwargs)
+    response = request(
+        "GET",
+        URI(
+            BEA_API_BASEURL,
+            query = append!(
+                [
+                    "UserID" => BEA_token,
+                    "method" => basic ? "GetParameterValues" : "GetParameterValuesFiltered",
+                    "DatasetName" => DatasetName,
+                    (basic ? "ParameterName" : "TargetParameter") => ParameterName,
+                    ],
+                ( string(k) => string(v) for (k, v) in kwargs )
+                )
+            ),
+        )
+    json = JSON3.read(response.body)
+    if haskey(json.BEAAPI.Results, :Error)
+        @assert json.BEAAPI.Results.Error.APIErrorCode ∈ [
+            "31", # Invalid parameter name.
+            "34", # The GetParameterValuesFiltered method has not been implemented on this dataset (coming soon).
+            ] "Unkown API Error"
+        throw(ArgumentError(json.BEAAPI.Results.Error.APIErrorDescription))
+    else
+        DataFrame(json.BEAAPI.Results.ParamValue)
+    end
+end

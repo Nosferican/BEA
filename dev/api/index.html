@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>API · BEA.jl</title><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.044/juliamono.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">BEA.jl</a></span></div><form class="docs-search" action="../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../">BEA.jl</a></li><li class="is-active"><a class="tocitem" href>API</a><ul class="internal"><li><a class="tocitem" href="#Types"><span>Types</span></a></li><li><a class="tocitem" href="#Functions"><span>Functions</span></a></li></ul></li><li><a class="tocitem" href="../manual/">Example Pipeline</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>API</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>API</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/Nosferican/BEA.jl/blob/main/docs/src/api.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="API"><a class="docs-heading-anchor" href="#API">API</a><a id="API-1"></a><a class="docs-heading-anchor-permalink" href="#API" title="Permalink"></a></h1><h2 id="Types"><a class="docs-heading-anchor" href="#Types">Types</a><a id="Types-1"></a><a class="docs-heading-anchor-permalink" href="#Types" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="BEA.AMNE" href="#BEA.AMNE"><code>BEA.AMNE</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">AMNE(
+    directionofinvestment::AbstractString,
+    allaffiliates::Bool,
+    nonbankaffiliatesonly::Bool,
+    classification::AbstractString,
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}};
+    seriesid::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}} = &quot;ALL&quot;,
+    country::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}} = &quot;ALL&quot;,
+    industry::Union{AbstractString, AbstractVector{&lt;:AbstractString}} = &quot;ALL&quot;,
+    state::AbstractString = &quot;ALL&quot;,
+    getfootnotes::Bool = false
+    ) -&gt; AMNE</code></pre><p>Activities of Multinational Enterprises (AMNE) — operations and finances of U. S. parent enterprises and their foreign affiliates and U. S. affiliates of foreign MNEs.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = AMNE(&quot;Outward&quot;, false, false, &quot;CountryByIndustry&quot;, 2011:2012, seriesid = 4:5, country = 202)
+AMNE(&quot;Outward&quot;, &quot;0&quot;, &quot;0&quot;, &quot;4,5&quot;, &quot;CountryByIndustry&quot;, &quot;2011,2012&quot;, &quot;202&quot;, &quot;ALL&quot;, &quot;ALL&quot;, &quot;No&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = AMNE(&quot;Inward&quot;, false, false, &quot;Country&quot;, 2011, seriesid = 8, industry = &quot;0000&quot;)
+AMNE(&quot;Inward&quot;, &quot;0&quot;, &quot;0&quot;, &quot;8&quot;, &quot;Country&quot;, &quot;2011&quot;, &quot;ALL&quot;, &quot;0000&quot;, &quot;ALL&quot;, &quot;No&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L215-L242">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.DirectInvestment" href="#BEA.DirectInvestment"><code>BEA.DirectInvestment</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">DirectInvestment(
+    directionofinvestment::AbstractString,
+    classification::AbstractString,
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}};
+    country::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}} = &quot;ALL&quot;,
+    industry::Union{AbstractString, AbstractVector{&lt;:AbstractString}} = &quot;ALL&quot;,
+    seriesid::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}} = &quot;ALL&quot;,
+    getfootnotes::Bool = false
+    ) -&gt; DirectInvestment</code></pre><p>Direct Investment (DI) — income and financial transactions in direct investment that underlie the U. S. balance of payments statistics, and direct investment positions that underlie the U. S. international investment positions.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = DirectInvestment(&quot;Outward&quot;, &quot;Country&quot;, 2011:2012, country = [650, 699])
+DirectInvestment(&quot;Outward&quot;, &quot;ALL&quot;, &quot;Country&quot;, &quot;2011,2012&quot;, &quot;650,699&quot;, &quot;ALL&quot;, &quot;No&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = DirectInvestment(&quot;Inward&quot;, &quot;CountryByIndustry&quot;, 2010:2013, country = 308, industry = &quot;3000&quot;)
+DirectInvestment(&quot;Inward&quot;, &quot;ALL&quot;, &quot;CountryByIndustry&quot;, &quot;2010,2011,2012,2013&quot;, &quot;308&quot;, &quot;3000&quot;, &quot;No&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L159-L183">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.FixedAssets" href="#BEA.FixedAssets"><code>BEA.FixedAssets</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">FixedAssets(
+    tablename::AbstractString,
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}}
+    ) -&gt; FixedAssets</code></pre><p>This dataset contains data from the standard set of Fixed Assets tables as published online.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = FixedAssets(&quot;FAAt201&quot;, &quot;ALL&quot;)
+FixedAssets(&quot;FAAt201&quot;, &quot;ALL&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = FixedAssets(&quot;FAAt405&quot;, 2015:2016)
+FixedAssets(&quot;FAAt405&quot;, &quot;2015,2016&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L128-L147">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.GDPbyIndustry" href="#BEA.GDPbyIndustry"><code>BEA.GDPbyIndustry</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">GDPbyIndustry(
+    tableid::Union{AbstractString, Integer},
+    frequency::Union{Char, AbstractVector{&lt;:Char}},
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}},
+    industry::Union{AbstractString, AbstractVector{&lt;:AbstractString}}
+    ) -&gt; GDPbyIndustry</code></pre><p>The gross domestic product by industry data are contained within a dataset called GDPbyIndustry. BEA&#39;s industry accounts are used extensively by policymakers and businesses to understand industry interactions, productivity trends, and the changing structure of the U. S. economy. The GDP-by-industry dataset includes data in both current and chained (real) dollars. The dataset contains estimates for value added, gross output, intermediate inputs, KLEMS and employment statistics.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = GDPbyIndustry(1, &#39;A&#39;, 2011:2012, &quot;ALL&quot;)
+GDPbyIndustry(&quot;1&quot;, &quot;A&quot;, &quot;2011,2012&quot;, &quot;ALL&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = GDPbyIndustry(11, [&#39;A&#39;, &#39;Q&#39;], 2010, &quot;11&quot;)
+GDPbyIndustry(&quot;11&quot;, &quot;A,Q&quot;, &quot;2010&quot;, &quot;11&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L281-L302">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.IIP" href="#BEA.IIP"><code>BEA.IIP</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">IIP(;
+    typeofinvestment::Union{AbstractVector{&lt;:AbstractString}, AbstractString} = &quot;ALL&quot;,
+    component::Union{AbstractVector{&lt;:AbstractString}, AbstractString} = &quot;ALL&quot;,
+    frequency::Union{Char, AbstractVector{&lt;:Char}} = [&#39;A&#39;, &#39;N&#39;],
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}} = &quot;ALL&quot;
+    ) -&gt; IPP</code></pre><p>This dataset contains data on the U. S. international investment position. BEA&#39;s international investment position accounts include the end of period value of accumulated stocks of U. S. financial assets and liabilities.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = IIP(typeofinvestment = &quot;FinAssetsExclFinDeriv&quot;, component = &quot;ChgPosPrice&quot;, frequency = &#39;A&#39;)
+IIP(&quot;FinAssetsExclFinDeriv&quot;, &quot;ChgPosPrice&quot;, &quot;A&quot;, &quot;ALL&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = IIP(typeofinvestment = &quot;FinLiabsFoa&quot;, component = &quot;Pos&quot;, frequency = &#39;N&#39;, year = 2013)
+IIP(&quot;FinLiabsFoa&quot;, &quot;Pos&quot;, &quot;QNSA&quot;, &quot;2013&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L363-L384">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.ITA" href="#BEA.ITA"><code>BEA.ITA</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">ITA(
+    indicator::Union{AbstractVector{&lt;:AbstractString}, AbstractString} = &quot;ALL&quot;,
+    areaorcountry::Union{AbstractVector{&lt;:AbstractString}, AbstractString} = &quot;ALL&quot;,
+    frequency::Union{Char, AbstractVector{&lt;:Char}} = [&#39;A&#39;, &#39;S&#39;, &#39;N&#39;],
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}} = &quot;ALL&quot;
+    ) -&gt; ITA</code></pre><p>International Transactions data on U.S. international transactions. BEA&#39;s international transactions (balance of payments) accounts include all transactions between U. S. and foreign residents.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = ITA(indicator = &quot;BalGds&quot;, areaorcountry = &quot;China&quot;, frequency = &#39;A&#39;, year = 2011:2012)
+ITA(&quot;BalGds&quot;, &quot;China&quot;, &quot;A&quot;, &quot;2011,2012&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = ITA(indicator = &quot;PfInvAssets&quot;, areaorcountry = &quot;AllCountries&quot;, frequency = &#39;N&#39;, year = 2013)
+ITA(&quot;PfInvAssets&quot;, &quot;AllCountries&quot;, &quot;QNSA&quot;, &quot;2013&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L322-L343">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.InputOutput" href="#BEA.InputOutput"><code>BEA.InputOutput</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">InputOutput(
+    tableid::Union{Integer, AbstractVector{&lt;:Integer}},
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}}
+    ) -&gt; InputOutput</code></pre><p>The input-output accounts provide a detailed view of the interrelationships between U.S. producers and users. The Input‐Output dataset contains Make Tables, Use Tables, and Direct and Total Requirements tables.y. The input-output accounts provide a detailed view of the interrelationships between U.S. producers and users. The Input‐Output dataset contains Make Tables, Use Tables, and Direct and Total Requirements tables.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = InputOutput(56, 2010:2013)
+InputOutput(&quot;56&quot;, &quot;2010,2011,2012,2013&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = InputOutput(56:57, 2007)
+InputOutput(&quot;56,57&quot;, &quot;2007&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L404-L423">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.IntlServTrade" href="#BEA.IntlServTrade"><code>BEA.IntlServTrade</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">IntlServTrade(;
+    typeofservice::Union{AbstractString, AbstractVector{&lt;:AbstractString}} = &quot;ALL&quot;,
+    tradedirection::Union{AbstractString, AbstractVector{&lt;:AbstractString}} = &quot;ALL&quot;,
+    affiliation::Union{AbstractString, AbstractVector{&lt;:AbstractString}} = &quot;ALL&quot;,
+    areaorcountry::Union{AbstractString, AbstractVector{&lt;:AbstractString}} = &quot;AllCountries&quot;,
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}} = &quot;All&quot;
+    ) -&gt; IntlServTrade</code></pre><p>This dataset contains annual data on U.S. international trade in services.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = IntlServTrade(typeofservice = &quot;AllTypesOfService&quot;, tradedirection = &quot;Imports&quot;, areaorcountry = &quot;Germany&quot;, year = 2014:2015)
+IntlServTrade(&quot;AllTypesOfService&quot;, &quot;Imports&quot;, &quot;ALL&quot;, &quot;Germany&quot;, &quot;2014,2015&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = IntlServTrade(typeofservice = &quot;Telecom&quot;, tradedirection = &quot;Exports&quot;, affiliation = &quot;UsParents&quot;)
+IntlServTrade(&quot;Telecom&quot;, &quot;Exports&quot;, &quot;UsParents&quot;, &quot;AllCountries&quot;, &quot;ALL&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L478-L500">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.NIPA" href="#BEA.NIPA"><code>BEA.NIPA</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">NIPA(
+    tablename::AbstractString,
+    frequency::Union{Frequency, AbstractVector{Frequency}},
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}}
+    ) -&gt; NIPA</code></pre><p>This dataset contains data from the National Income and Product Accounts (NIPA) which include measures of the value and composition of U.S.production and the incomes generated in producing it.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = NIPA(&quot;T10101&quot;, [&#39;A&#39;, &#39;Q&#39;], &quot;ALL&quot;)
+NIPA(&quot;T10101&quot;, &quot;A,Q&quot;, &quot;ALL&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = NIPA(&quot;T20600&quot;, &#39;M&#39;, 2015:2016)
+NIPA(&quot;T20600&quot;, &quot;M&quot;, &quot;2015,2016&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L54-L74">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.NIUnderlyingDetail" href="#BEA.NIUnderlyingDetail"><code>BEA.NIUnderlyingDetail</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">NIUnderlyingDetail(
+    tablename::AbstractString,
+    frequency::Union{Frequency, AbstractVector{Frequency}},
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}}
+    ) -&gt; NIUnderlyingDetail</code></pre><p>This dataset contains underlying detail data from the National Income and Product Accounts (NIPA) which include measures of the value and composition of U.S.production and the incomes generated in producing it.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = NIUnderlyingDetail(&quot;U20305&quot;, [&#39;A&#39;, &#39;Q&#39;, &#39;M&#39;], &quot;ALL&quot;)
+NIUnderlyingDetail(&quot;U20305&quot;, &quot;A,M,Q&quot;, &quot;ALL&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = NIUnderlyingDetail(&quot;U70205S&quot;, &#39;M&#39;, 2015:2016)
+NIUnderlyingDetail(&quot;U70205S&quot;, &quot;M&quot;, &quot;2015,2016&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L91-L111">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.Regional" href="#BEA.Regional"><code>BEA.Regional</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">Regional(
+    tablename::AbstractString,
+    linecode::Union{AbstractString, Integer},
+    geofips::Union{AbstractString, AbstractVector{&lt;:AbstractString}},
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Union{&lt;:AbstractString, Integer}}} = &quot;LAST5&quot;
+    ) -&gt; Regional</code></pre><p>The Regional dataset contains income and employment estimates from the Regional Economic Accounts by state, county, and metropolitan area</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = Regional(&quot;CAINC1&quot;, 1, &quot;County&quot;, 2012:2013)
+Regional(&quot;CAINC1&quot;, &quot;1&quot;, &quot;County&quot;, &quot;2012,2013&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = Regional(&quot;SAGDP9N&quot;, 2, &quot;STATE&quot;, &quot;ALL&quot;)
+Regional(&quot;SAGDP9N&quot;, &quot;2&quot;, &quot;STATE&quot;, &quot;ALL&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L523-L544">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.UnderlyingGDPbyIndustry" href="#BEA.UnderlyingGDPbyIndustry"><code>BEA.UnderlyingGDPbyIndustry</code></a> — <span class="docstring-category">Type</span></header><section><div><pre><code class="language-julia hljs">UnderlyingGDPbyIndustry(
+    tableid::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}},
+    industry::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}},
+    year::Union{AbstractString, Integer, AbstractVector{&lt;:Integer}},
+    frequency::Union{Char, AbstractVector{&lt;:Char}} = &#39;A&#39;
+    ) -&gt; UnderlyingGDPbyIndustry</code></pre><p>The underlying GDP-by-industry dataset includes data in both current and chained (real) dollars. The dataset contains estimates for value added, gross output, and intermediate input statistics. This dataset is structurally similar to the GDPbyIndustry dataset (Appendix F), but contains additional industry detail.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = UnderlyingGDPbyIndustry(210, &quot;ALL&quot;, 2010:2013)
+UnderlyingGDPbyIndustry(&quot;210&quot;, &quot;A&quot;, &quot;2010,2011,2012,2013&quot;, &quot;ALL&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; query = UnderlyingGDPbyIndustry(&quot;ALL&quot;, 11, 2012)
+UnderlyingGDPbyIndustry(&quot;ALL&quot;, &quot;A&quot;, &quot;2012&quot;, &quot;11&quot;)</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L437-L458">source</a></section></article><h2 id="Functions"><a class="docs-heading-anchor" href="#Functions">Functions</a><a id="Functions-1"></a><a class="docs-heading-anchor-permalink" href="#Functions" title="Permalink"></a></h2><article class="docstring"><header><a class="docstring-binding" id="BEA.bea_api_data-Tuple{AbstractString, BEA.BEA_API_Datasets}" href="#BEA.bea_api_data-Tuple{AbstractString, BEA.BEA_API_Datasets}"><code>BEA.bea_api_data</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">bea_api_data(
+    BEA_token::AbstractString,
+    query::BEA_API_Datasets
+    ) -&gt; DataFrame</code></pre><p>Return data from a query.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; query = FixedAssets(&quot;FAAt201&quot;, &quot;ALL&quot;)
+FixedAssets(&quot;FAAt201&quot;, &quot;ALL&quot;)</code></pre><pre><code class="language-julia-repl hljs">julia&gt; bea_api_data(BEA_token, query)
+9888×10 DataFrame
+  Row │ TableName  SeriesCode    LineNumber  LineDescription       TimePeriod  METRIC_NAME      CL_UNIT  UNIT_MULT  Da ⋯
+      │ String     String        String      String                String      String           String   String     St ⋯
+──────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    1 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1925        Current Dollars  Level    9          22 ⋯
+    2 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1926        Current Dollars  Level    9          23
+    3 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1927        Current Dollars  Level    9          23
+    4 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1928        Current Dollars  Level    9          24
+    5 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1929        Current Dollars  Level    9          25 ⋯
+    6 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1930        Current Dollars  Level    9          23
+    7 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1931        Current Dollars  Level    9          20
+    8 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1932        Current Dollars  Level    9          18
+    9 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1933        Current Dollars  Level    9          19 ⋯
+   10 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1934        Current Dollars  Level    9          19
+   11 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1935        Current Dollars  Level    9          19
+  ⋮   │     ⋮           ⋮            ⋮                ⋮                ⋮              ⋮            ⋮         ⋮         ⋱
+ 9879 │ FAAt201    k1ntotl1ae50  103         Other                 2011        Current Dollars  Level    9          27
+ 9880 │ FAAt201    k1ntotl1ae50  103         Other                 2012        Current Dollars  Level    9          27 ⋯
+ 9881 │ FAAt201    k1ntotl1ae50  103         Other                 2013        Current Dollars  Level    9          27
+ 9882 │ FAAt201    k1ntotl1ae50  103         Other                 2014        Current Dollars  Level    9          28
+ 9883 │ FAAt201    k1ntotl1ae50  103         Other                 2015        Current Dollars  Level    9          28
+ 9884 │ FAAt201    k1ntotl1ae50  103         Other                 2016        Current Dollars  Level    9          28 ⋯
+ 9885 │ FAAt201    k1ntotl1ae50  103         Other                 2017        Current Dollars  Level    9          29
+ 9886 │ FAAt201    k1ntotl1ae50  103         Other                 2018        Current Dollars  Level    9          29
+ 9887 │ FAAt201    k1ntotl1ae50  103         Other                 2019        Current Dollars  Level    9          30
+ 9888 │ FAAt201    k1ntotl1ae50  103         Other                 2020        Current Dollars  Level    9          30 ⋯
+                                                                                         2 columns and 9867 rows omitted</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/data.jl#L564-L610">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.bea_api_datasets-Tuple{AbstractString}" href="#BEA.bea_api_datasets-Tuple{AbstractString}"><code>BEA.bea_api_datasets</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">bea_api_datasets(BEA_token::AbstractString) -&gt; DataFrame</code></pre><p>Retrieves datasets currently available.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; bea_api_datasets(BEA_token)
+12×2 DataFrame
+ Row │ DatasetName              DatasetDescription
+     │ String                   String
+─────┼────────────────────────────────────────────────────────────
+   1 │ NIPA                     Standard NIPA tables
+   2 │ NIUnderlyingDetail       Standard NI underlying detail ta…
+   3 │ MNE                      Multinational Enterprises
+   4 │ FixedAssets              Standard Fixed Assets tables
+   5 │ ITA                      International Transactions Accou…
+   6 │ IIP                      International Investment Position
+   7 │ InputOutput              Input-Output Data
+   8 │ IntlServTrade            International Services Trade
+   9 │ GDPbyIndustry            GDP by Industry
+  10 │ Regional                 Regional data sets
+  11 │ UnderlyingGDPbyIndustry  Underlying GDP by Industry
+  12 │ APIDatasetMetaData       Metadata about other API datasets</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/datasets.jl#L1-L28">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.bea_api_parameters-Tuple{AbstractString, AbstractString}" href="#BEA.bea_api_parameters-Tuple{AbstractString, AbstractString}"><code>BEA.bea_api_parameters</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">bea_api_parameters(
+    BEA_token::AbstractString,
+    dataset::AbstractString
+    ) -&gt; DataFrame</code></pre><p>Retrieves a list of the datasets currently offered.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; bea_api_parameters(BEA_token, &quot;NIPA&quot;)
+5×7 DataFrame
+ Row │ ParameterName  ParameterDescription               ParameterDataType  ParameterIsRequiredFlag  ParameterDefaultV ⋯
+     │ String         String                             String             Bool                     String?           ⋯
+─────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+   1 │ Frequency      A - Annual, Q-Quarterly, M-Month…  string                                true  missing           ⋯
+   2 │ ShowMillions   A flag indicating that million-d…  string                               false  N
+   3 │ TableID        The standard NIPA table identifi…  integer                              false  missing
+   4 │ TableName      The new NIPA table identifier      string                               false  missing
+   5 │ Year           List of year(s) of data to retri…  integer                               true  missing           ⋯
+                                                                                                       3 columns omitted</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/parameters.jl#L1-L24">source</a></section></article><article class="docstring"><header><a class="docstring-binding" id="BEA.bea_api_parametervalues-Tuple{AbstractString, AbstractString, AbstractString}" href="#BEA.bea_api_parametervalues-Tuple{AbstractString, AbstractString, AbstractString}"><code>BEA.bea_api_parametervalues</code></a> — <span class="docstring-category">Method</span></header><section><div><pre><code class="language-julia hljs">bea_api_parametervalues(
+    BEA_token::AbstractString,
+    DatasetName::AbstractString,
+    ParameterName::AbstractString;
+    kwargs...) -&gt; DataFrame</code></pre><p>Retrieves a list of the valid values for a particular parameter.</p><p><strong>Examples</strong></p><pre><code class="language-julia-repl hljs">julia&gt; bea_api_parametervalues(BEA_token, &quot;Regional&quot;, &quot;TableName&quot;)
+99×2 DataFrame
+ Row │ Key       Desc
+     │ String    String
+─────┼─────────────────────────────────────────────
+   1 │ CAEMP25N  Total Full-Time and Part-Time Em…
+   2 │ CAEMP25S  Total Full-Time and Part-Time Em…
+   3 │ CAGDP1    Gross Domestic Product (GDP) sum…
+   4 │ CAGDP11   Contributions to percent change …
+   5 │ CAGDP2    Gross domestic product (GDP) by …
+   6 │ CAGDP8    Chain-type quantity indexes for …
+   7 │ CAGDP9    Real GDP by county and metropoli…
+   8 │ CAINC1    Personal Income Summary: Persona…
+   9 │ CAINC30   Economic Profile (Non-Industry)
+  10 │ CAINC35   Personal Current Transfer Receip…
+  11 │ CAINC4    Personal Income and Employment b…
+  ⋮  │    ⋮                      ⋮
+  90 │ SQINC35   Personal Current Transfer Receip…
+  91 │ SQINC4    Personal Income by Major Compone…
+  92 │ SQINC5H   Personal Income by Major Compone…
+  93 │ SQINC5N   Personal Income by Major Compone…
+  94 │ SQINC5S   Personal Income by Major Compone…
+  95 │ SQINC6N   Compensation of Employees by NAI…
+  96 │ SQINC6S   Compensation of Employees by SIC…
+  97 │ SQINC7H   Wages and Salaries by Industry (…
+  98 │ SQINC7N   Wages and Salaries by NAICS Indu…
+  99 │ SQINC7S   Wages and Salaries by SIC Indust…
+                                    78 rows omitted</code></pre><pre><code class="language-julia-repl hljs">julia&gt; bea_api_parametervalues(BEA_token, &quot;MNE&quot;, &quot;Country&quot;)
+259×2 DataFrame
+ Row │ key     desc
+     │ String  String
+─────┼──────────────────────────────
+   1 │ all      all
+   2 │ 000      all Countries Total
+   3 │ 600     Afghanistan
+   4 │ 499     Africa
+   5 │ 350     Albania
+   6 │ 400     Algeria
+   7 │ 300     Andorra
+   8 │ 401     Angola
+   9 │ 272     Anguilla
+  10 │ 273     Antigua and Barbuda
+  11 │ 200     Argentina
+  ⋮  │   ⋮              ⋮
+ 250 │ 653     Vietnam
+ 251 │ 440     Western Sahara
+ 252 │ 637     Western Samoa
+ 253 │ 514     Yemen
+ 254 │ 500     Yemen (Aden)
+ 255 │ 514     Yemen (Sanaa)
+ 256 │ 328     Yugoslavia
+ 257 │ 408     Zaire
+ 258 │ 448     Zambia
+ 259 │ 431     Zimbabwe
+                    238 rows omitted</code></pre><pre><code class="language-julia-repl hljs">julia&gt; bea_api_parametervalues(BEA_token, &quot;Regional&quot;, &quot;LineCode&quot;, TableName = &quot;SQINC7N&quot;, Year = 2020)
+29×2 DataFrame
+ Row │ Key     Desc
+     │ String  String
+─────┼───────────────────────────────────────────
+   1 │ 100     [SQINC7N] Private wages and sala…
+   2 │ 1000    [SQINC7N] Private nonfarm wages …
+   3 │ 1100    [SQINC7N] Private nonfarm wages …
+   4 │ 1200    [SQINC7N] Private nonfarm wages …
+   5 │ 1300    [SQINC7N] Private nonfarm wages …
+   6 │ 1400    [SQINC7N] Private nonfarm wages …
+   7 │ 1500    [SQINC7N] Private nonfarm wages …
+   8 │ 1600    [SQINC7N] Private nonfarm wages …
+   9 │ 1700    [SQINC7N] Private nonfarm wages …
+  10 │ 1800    [SQINC7N] Private nonfarm wages …
+  11 │ 1900    [SQINC7N] Private nonfarm wages …
+  ⋮  │   ⋮                     ⋮
+  20 │ 500     [SQINC7N] Private nonfarm wages …
+  21 │ 510     [SQINC7N] Private nonfarm wages …
+  22 │ 530     [SQINC7N] Private nonfarm wages …
+  23 │ 600     [SQINC7N] Private nonfarm wages …
+  24 │ 700     [SQINC7N] Private nonfarm wages …
+  25 │ 800     [SQINC7N] Private nonfarm wages …
+  26 │ 81      [SQINC7N] Farm wages and salarie…
+  27 │ 82      [SQINC7N] Nonfarm wages and sala…
+  28 │ 90      [SQINC7N] Private nonfarm wages …
+  29 │ 900     [SQINC7N] Private nonfarm wages …
+                                   8 rows omitted</code></pre></div><a class="docs-sourcelink" target="_blank" href="https://github.com/Nosferican/BEA.jl/blob/a0a2fe4e7bf801ec07c56bb8bb31fa9db208608a/src/parametervalues.jl#L1-L104">source</a></section></article></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« BEA.jl</a><a class="docs-footer-nextpage" href="../manual/">Example Pipeline »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.19 on <span class="colophon-date" title="Tuesday 21 June 2022 16:00">Tuesday 21 June 2022</span>. Using Julia version 1.7.3.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

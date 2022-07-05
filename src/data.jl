@@ -314,7 +314,7 @@ struct GDPbyIndustry <: BEA_API_Datasets
         tableid = string(tableid)
         frequency = preprocess_frequency(frequency)
         year = preprocess_year(year)
-        singleormultiplevals(industry)
+        industry = singleormultiplevals(industry)
         new(tableid, frequency, year, industry)
     end
 end

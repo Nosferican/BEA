@@ -53,11 +53,11 @@ end
     query = GDPbyIndustry(
         1,
         'A',
-        2011:2012,
+        2017:2018,
         "ALL"
         )
     x = bea_api_data(API_BEA, query)
-    @test parse.(Int, sort!(unique(x[!,:Year]))) == 2011:2012
+    @test parse.(Int, sort!(unique(x[!,:Year]))) == 2017:2018
     sleep(0.5)
     query = ITA(
         indicator = "BalGds",
@@ -73,17 +73,19 @@ end
     x = bea_api_data(API_BEA, query)
     @test parse(Int, minimum(x[!,:Year])) == 2003
     sleep(0.5)
-    query = InputOutput(56, 2010:2013)
+    #= Suspeded while CU finishes
+    query = InputOutput(56, 2017:2019)
     x = bea_api_data(API_BEA, query)
-    @test parse(Int, minimum(x[!,:Year])) == 2010
+    @test parse(Int, minimum(x[!,:Year])) == 2017
     sleep(0.5)
+    =#
     query = UnderlyingGDPbyIndustry(
         210,
         "ALL",
-        2012:2013
+        2017:2019
         )
     x = bea_api_data(API_BEA, query)
-    @test parse.(Int, sort!(unique(x[!,:Year]))) == 2012:2013
+    @test parse.(Int, sort!(unique(x[!,:Year]))) == 2017:2019
     sleep(0.5)
     query = IntlServTrade()
     x = bea_api_data(API_BEA, query)

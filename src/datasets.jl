@@ -5,9 +5,9 @@ Retrieves datasets currently available.
 
 # Examples
 
-```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
+```jldoctest; setup =: (using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> bea_api_datasets(BEA_token)
-12×2 DataFrame
+13×2 DataFrame
  Row │ DatasetName              DatasetDescription
      │ String                   String
 ─────┼────────────────────────────────────────────────────────────
@@ -19,12 +19,13 @@ julia> bea_api_datasets(BEA_token)
    6 │ IIP                      International Investment Position
    7 │ InputOutput              Input-Output Data
    8 │ IntlServTrade            International Services Trade
-   9 │ GDPbyIndustry            GDP by Industry
-  10 │ Regional                 Regional data sets
-  11 │ UnderlyingGDPbyIndustry  Underlying GDP by Industry
-  12 │ APIDatasetMetaData       Metadata about other API datasets
-```
+   9 │ IntlServSTA              International Services Supplied …
+  10 │ GDPbyIndustry            GDP by Industry
+  11 │ Regional                 Regional data sets
+  12 │ UnderlyingGDPbyIndustry  Underlying GDP by Industry
+  13 │ APIDatasetMetaData       Metadata about other API datasets
 
+```
 """
 function bea_api_datasets(BEA_token::AbstractString) :: DataFrame
     response = request(

@@ -103,10 +103,12 @@ This dataset contains underlying detail data from the National Income and Produc
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = NIUnderlyingDetail("U20305", ['A', 'Q', 'M'], "ALL")
+NIUnderlyingDetail("U20305", "A,M,Q", "ALL")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = NIUnderlyingDetail("U70205S", 'M', 2015:2016)
+NIUnderlyingDetail("U70205S", "M", "2015,2016")
 ```
 """
 struct NIUnderlyingDetail <: BEA_API_Datasets
@@ -137,10 +139,12 @@ This dataset contains data from the standard set of Fixed Assets tables as publi
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = FixedAssets("FAAt201", "ALL")
+FixedAssets("FAAt201", "ALL")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = FixedAssets("FAAt405", 2015:2016)
+FixedAssets("FAAt405", "2015,2016")
 ```
 """
 struct FixedAssets <: BEA_API_Datasets
@@ -171,10 +175,12 @@ Direct Investment (DI) — income and financial transactions in direct investmen
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = DirectInvestment("Outward", "Country", 2011:2012, country = [650, 699])
+DirectInvestment("Outward", "ALL", "Country", "2011,2012", "650,699", "ALL", "No")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = DirectInvestment("Inward", "CountryByIndustry", 2010:2013, country = 308, industry = "3000")
+DirectInvestment("Inward", "ALL", "CountryByIndustry", "2010,2011,2012,2013", "308", "3000", "No")
 ```
 """
 struct DirectInvestment <: BEA_API_Datasets
@@ -228,10 +234,12 @@ Activities of Multinational Enterprises (AMNE) — operations and finances of U.
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = AMNE("Outward", false, false, "CountryByIndustry", 2011:2012, seriesid = 4:5, country = 202)
+AMNE("Outward", "0", "0", "4,5", "CountryByIndustry", "2011,2012", "202", "ALL", "ALL", "No")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = AMNE("Inward", false, false, "Country", 2011, seriesid = 8, industry = "0000")
+AMNE("Inward", "0", "0", "8", "Country", "2011", "ALL", "0000", "ALL", "No")
 ```
 """
 struct AMNE <: BEA_API_Datasets
@@ -286,10 +294,12 @@ The gross domestic product by industry data are contained within a dataset calle
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = GDPbyIndustry(1, 'A', 2011:2012, "ALL")
+GDPbyIndustry("1", "A", "2011,2012", "ALL")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = GDPbyIndustry(11, ['A', 'Q'], 2010, "11")
+GDPbyIndustry("11", "A,Q", "2010", "11")
 ```
 """
 struct GDPbyIndustry <: BEA_API_Datasets
@@ -325,10 +335,12 @@ International Transactions data on U.S. international transactions. BEA's intern
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = ITA(indicator = "BalGds", areaorcountry = "China", frequency = 'A', year = 2011:2012)
+ITA("BalGds", "China", "A", "2011,2012")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = ITA(indicator = "PfInvAssets", areaorcountry = "AllCountries", frequency = 'N', year = 2013)
+ITA("PfInvAssets", "AllCountries", "QNSA", "2013")
 ```
 """
 struct ITA <: BEA_API_Datasets
@@ -364,10 +376,12 @@ This dataset contains data on the U. S. international investment position. BEA's
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = IIP(typeofinvestment = "FinAssetsExclFinDeriv", component = "ChgPosPrice", frequency = 'A')
+IIP("FinAssetsExclFinDeriv", "ChgPosPrice", "A", "ALL")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = IIP(typeofinvestment = "FinLiabsFoa", component = "Pos", frequency = 'N', year = 2013)
+IIP("FinLiabsFoa", "Pos", "QNSA", "2013")
 ```
 """
 struct IIP <: BEA_API_Datasets
@@ -401,10 +415,12 @@ The input-output accounts provide a detailed view of the interrelationships betw
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = InputOutput(56, 2010:2013)
+InputOutput("56", "2010,2011,2012,2013")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = InputOutput(56:57, 2007)
+InputOutput("56,57", "2007")
 ```
 """
 struct InputOutput <: BEA_API_Datasets
@@ -434,10 +450,12 @@ The underlying GDP-by-industry dataset includes data in both current and chained
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = UnderlyingGDPbyIndustry(210, "ALL", 2017:2019)
+UnderlyingGDPbyIndustry("210", "A", "2017,2018,2019", "ALL")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = UnderlyingGDPbyIndustry("ALL", 11, 2017)
+UnderlyingGDPbyIndustry("ALL", "A", "2017", "11")
 ```
 """
 struct UnderlyingGDPbyIndustry <: BEA_API_Datasets
@@ -476,10 +494,12 @@ This dataset contains annual data on U.S. international trade in services.
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = IntlServTrade(typeofservice = "AllTypesOfService", tradedirection = "Imports", areaorcountry = "Germany", year = 2017:2018)
+IntlServTrade("AllTypesOfService", "Imports", "ALL", "Germany", "2017,2018")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = IntlServTrade(typeofservice = "Telecom", tradedirection = "Exports", affiliation = "UsParents")
+IntlServTrade("Telecom", "Exports", "UsParents", "AllCountries", "ALL")
 ```
 """
 struct IntlServTrade <: BEA_API_Datasets
@@ -518,10 +538,12 @@ The Regional dataset contains income and employment estimates from the Regional 
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = Regional("CAINC1", 1, "County", 2017:2018)
+Regional("CAINC1", "1", "County", "2017,2018")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = Regional("SAGDP9N", 2, "STATE", "ALL")
+Regional("SAGDP9N", "2", "STATE", "ALL")
 ```
 """
 struct Regional <: BEA_API_Datasets

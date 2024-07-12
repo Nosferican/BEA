@@ -65,11 +65,13 @@ This dataset contains data from the National Income and Product Accounts (NIPA) 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = NIPA("T10101", ['A', 'Q'], "ALL")
 NIPA("T10101", "A,Q", "ALL")
+
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = NIPA("T20600", 'M', 2015:2016)
 NIPA("T20600", "M", "2015,2016")
+
 ```
 """
 struct NIPA <: BEA_API_Datasets
@@ -101,12 +103,10 @@ This dataset contains underlying detail data from the National Income and Produc
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = NIUnderlyingDetail("U20305", ['A', 'Q', 'M'], "ALL")
-NIUnderlyingDetail("U20305", "A,M,Q", "ALL")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = NIUnderlyingDetail("U70205S", 'M', 2015:2016)
-NIUnderlyingDetail("U70205S", "M", "2015,2016")
 ```
 """
 struct NIUnderlyingDetail <: BEA_API_Datasets
@@ -137,12 +137,10 @@ This dataset contains data from the standard set of Fixed Assets tables as publi
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = FixedAssets("FAAt201", "ALL")
-FixedAssets("FAAt201", "ALL")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = FixedAssets("FAAt405", 2015:2016)
-FixedAssets("FAAt405", "2015,2016")
 ```
 """
 struct FixedAssets <: BEA_API_Datasets
@@ -173,12 +171,10 @@ Direct Investment (DI) — income and financial transactions in direct investmen
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = DirectInvestment("Outward", "Country", 2011:2012, country = [650, 699])
-DirectInvestment("Outward", "ALL", "Country", "2011,2012", "650,699", "ALL", "No")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = DirectInvestment("Inward", "CountryByIndustry", 2010:2013, country = 308, industry = "3000")
-DirectInvestment("Inward", "ALL", "CountryByIndustry", "2010,2011,2012,2013", "308", "3000", "No")
 ```
 """
 struct DirectInvestment <: BEA_API_Datasets
@@ -232,12 +228,10 @@ Activities of Multinational Enterprises (AMNE) — operations and finances of U.
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = AMNE("Outward", false, false, "CountryByIndustry", 2011:2012, seriesid = 4:5, country = 202)
-AMNE("Outward", "0", "0", "4,5", "CountryByIndustry", "2011,2012", "202", "ALL", "ALL", "No")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = AMNE("Inward", false, false, "Country", 2011, seriesid = 8, industry = "0000")
-AMNE("Inward", "0", "0", "8", "Country", "2011", "ALL", "0000", "ALL", "No")
 ```
 """
 struct AMNE <: BEA_API_Datasets
@@ -292,12 +286,10 @@ The gross domestic product by industry data are contained within a dataset calle
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = GDPbyIndustry(1, 'A', 2011:2012, "ALL")
-GDPbyIndustry("1", "A", "2011,2012", "ALL")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = GDPbyIndustry(11, ['A', 'Q'], 2010, "11")
-GDPbyIndustry("11", "A,Q", "2010", "11")
 ```
 """
 struct GDPbyIndustry <: BEA_API_Datasets
@@ -333,12 +325,10 @@ International Transactions data on U.S. international transactions. BEA's intern
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = ITA(indicator = "BalGds", areaorcountry = "China", frequency = 'A', year = 2011:2012)
-ITA("BalGds", "China", "A", "2011,2012")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = ITA(indicator = "PfInvAssets", areaorcountry = "AllCountries", frequency = 'N', year = 2013)
-ITA("PfInvAssets", "AllCountries", "QNSA", "2013")
 ```
 """
 struct ITA <: BEA_API_Datasets
@@ -374,12 +364,10 @@ This dataset contains data on the U. S. international investment position. BEA's
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = IIP(typeofinvestment = "FinAssetsExclFinDeriv", component = "ChgPosPrice", frequency = 'A')
-IIP("FinAssetsExclFinDeriv", "ChgPosPrice", "A", "ALL")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = IIP(typeofinvestment = "FinLiabsFoa", component = "Pos", frequency = 'N', year = 2013)
-IIP("FinLiabsFoa", "Pos", "QNSA", "2013")
 ```
 """
 struct IIP <: BEA_API_Datasets
@@ -413,12 +401,10 @@ The input-output accounts provide a detailed view of the interrelationships betw
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = InputOutput(56, 2010:2013)
-InputOutput("56", "2010,2011,2012,2013")
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = InputOutput(56:57, 2007)
-InputOutput("56,57", "2007")
 ```
 """
 struct InputOutput <: BEA_API_Datasets
@@ -447,13 +433,11 @@ The underlying GDP-by-industry dataset includes data in both current and chained
 # Examples
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
-julia> query = UnderlyingGDPbyIndustry(210, "ALL", 2010:2013)
-UnderlyingGDPbyIndustry("210", "A", "2010,2011,2012,2013", "ALL")
+julia> query = UnderlyingGDPbyIndustry(210, "ALL", 2017:2019)
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
-julia> query = UnderlyingGDPbyIndustry("ALL", 11, 2012)
-UnderlyingGDPbyIndustry("ALL", "A", "2012", "11")
+julia> query = UnderlyingGDPbyIndustry("ALL", 11, 2017)
 ```
 """
 struct UnderlyingGDPbyIndustry <: BEA_API_Datasets
@@ -488,14 +472,14 @@ This dataset contains annual data on U.S. international trade in services.
 
 # Examples
 
+# Examples
+
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
-julia> query = IntlServTrade(typeofservice = "AllTypesOfService", tradedirection = "Imports", areaorcountry = "Germany", year = 2014:2015)
-IntlServTrade("AllTypesOfService", "Imports", "ALL", "Germany", "2014,2015")
+julia> query = IntlServTrade(typeofservice = "AllTypesOfService", tradedirection = "Imports", areaorcountry = "Germany", year = 2017:2018)
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = IntlServTrade(typeofservice = "Telecom", tradedirection = "Exports", affiliation = "UsParents")
-IntlServTrade("Telecom", "Exports", "UsParents", "AllCountries", "ALL")
 ```
 """
 struct IntlServTrade <: BEA_API_Datasets
@@ -533,13 +517,11 @@ The Regional dataset contains income and employment estimates from the Regional 
 # Examples
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
-julia> query = Regional("CAINC1", 1, "County", 2012:2013)
-Regional("CAINC1", "1", "County", "2012,2013")
+julia> query = Regional("CAINC1", 1, "County", 2017:2018)
 ```
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = Regional("SAGDP9N", 2, "STATE", "ALL")
-Regional("SAGDP9N", "2", "STATE", "ALL")
 ```
 """
 struct Regional <: BEA_API_Datasets
@@ -573,38 +555,38 @@ Return data from a query.
 
 ```jldoctest nipa; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = FixedAssets("FAAt201", "ALL")
-FixedAssets("FAAt201", "ALL")
+
 ```
 
 ```jldoctest nipa; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> bea_api_data(BEA_token, query)
-9888×10 DataFrame
-  Row │ TableName  SeriesCode    LineNumber  LineDescription       TimePeriod  METRIC_NAME      CL_UNIT  UNIT_MULT  Da ⋯
-      │ String     String        String      String                String      String           String   String     St ⋯
-──────┼─────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-    1 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1925        Current Dollars  Level    9          22 ⋯
-    2 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1926        Current Dollars  Level    9          23
-    3 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1927        Current Dollars  Level    9          23
-    4 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1928        Current Dollars  Level    9          24
-    5 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1929        Current Dollars  Level    9          25 ⋯
-    6 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1930        Current Dollars  Level    9          23
-    7 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1931        Current Dollars  Level    9          20
-    8 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1932        Current Dollars  Level    9          18
-    9 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1933        Current Dollars  Level    9          19 ⋯
-   10 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1934        Current Dollars  Level    9          19
-   11 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1935        Current Dollars  Level    9          19
-  ⋮   │     ⋮           ⋮            ⋮                ⋮                ⋮              ⋮            ⋮         ⋮         ⋱
- 9879 │ FAAt201    k1ntotl1ae50  103         Other                 2011        Current Dollars  Level    9          27
- 9880 │ FAAt201    k1ntotl1ae50  103         Other                 2012        Current Dollars  Level    9          27 ⋯
- 9881 │ FAAt201    k1ntotl1ae50  103         Other                 2013        Current Dollars  Level    9          27
- 9882 │ FAAt201    k1ntotl1ae50  103         Other                 2014        Current Dollars  Level    9          28
- 9883 │ FAAt201    k1ntotl1ae50  103         Other                 2015        Current Dollars  Level    9          28
- 9884 │ FAAt201    k1ntotl1ae50  103         Other                 2016        Current Dollars  Level    9          28 ⋯
- 9885 │ FAAt201    k1ntotl1ae50  103         Other                 2017        Current Dollars  Level    9          29
- 9886 │ FAAt201    k1ntotl1ae50  103         Other                 2018        Current Dollars  Level    9          29
- 9887 │ FAAt201    k1ntotl1ae50  103         Other                 2019        Current Dollars  Level    9          30
- 9888 │ FAAt201    k1ntotl1ae50  103         Other                 2020        Current Dollars  Level    9          30 ⋯
-                                                                                         2 columns and 9867 rows omitted
+10094×10 DataFrame
+   Row │ TableName  SeriesCode    LineNumber  LineDescription       TimePeriod  METRIC_NAME      CL_UNIT  UNIT_MULT  D ⋯
+       │ String     String        String      String                String      String           String   String     S ⋯
+───────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+     1 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1925        Current Dollars  Level    6          2 ⋯
+     2 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1926        Current Dollars  Level    6          2
+     3 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1927        Current Dollars  Level    6          2
+     4 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1928        Current Dollars  Level    6          2
+     5 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1929        Current Dollars  Level    6          2 ⋯
+     6 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1930        Current Dollars  Level    6          2
+     7 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1931        Current Dollars  Level    6          2
+     8 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1932        Current Dollars  Level    6          1
+     9 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1933        Current Dollars  Level    6          1 ⋯
+    10 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1934        Current Dollars  Level    6          1
+    11 │ FAAt201    k1ptotl1es00  1           Private fixed assets  1935        Current Dollars  Level    6          1
+   ⋮   │     ⋮           ⋮            ⋮                ⋮                ⋮              ⋮            ⋮         ⋮        ⋱
+ 10085 │ FAAt201    k1ntotl1ae50  103         Other                 2013        Current Dollars  Level    6          2
+ 10086 │ FAAt201    k1ntotl1ae50  103         Other                 2014        Current Dollars  Level    6          2 ⋯
+ 10087 │ FAAt201    k1ntotl1ae50  103         Other                 2015        Current Dollars  Level    6          2
+ 10088 │ FAAt201    k1ntotl1ae50  103         Other                 2016        Current Dollars  Level    6          2
+ 10089 │ FAAt201    k1ntotl1ae50  103         Other                 2017        Current Dollars  Level    6          2
+ 10090 │ FAAt201    k1ntotl1ae50  103         Other                 2018        Current Dollars  Level    6          2 ⋯
+ 10091 │ FAAt201    k1ntotl1ae50  103         Other                 2019        Current Dollars  Level    6          3
+ 10092 │ FAAt201    k1ntotl1ae50  103         Other                 2020        Current Dollars  Level    6          3
+ 10093 │ FAAt201    k1ntotl1ae50  103         Other                 2021        Current Dollars  Level    6          3
+ 10094 │ FAAt201    k1ntotl1ae50  103         Other                 2022        Current Dollars  Level    6          3 ⋯
+                                                                                        2 columns and 10073 rows omitted
 ```
 
 """

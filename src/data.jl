@@ -577,7 +577,7 @@ Return data from a query.
 
 ```jldoctest nipa; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = FixedAssets("FAAt201", "ALL")
-
+FixedAssets("FAAt201", "ALL")
 ```
 
 ```jldoctest nipa; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)

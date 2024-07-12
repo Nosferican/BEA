@@ -5,7 +5,7 @@ Retrieves datasets currently available.
 
 # Examples
 
-```jldoctest; setup =: (using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
+```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> bea_api_datasets(BEA_token)
 13×2 DataFrame
  Row │ DatasetName              DatasetDescription

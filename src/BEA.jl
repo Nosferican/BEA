@@ -9,6 +9,11 @@ module BEA
     using DataFrames
     using PeriodicalDates: PeriodicalDates, TimeType, MonthlyDate, QuarterlyDate, YearlyDate
 
+    """
+        BEA_API_BASEURL -> URI
+
+    Base url for the BEA API.
+    """
     const BEA_API_BASEURL = URI(
         scheme = "https",
         host = "apps.bea.gov",
@@ -19,7 +24,7 @@ module BEA
         file -> include(joinpath(dirname(@__DIR__), "src", "$file.jl")),
         ["datasets", "parameters", "parametervalues", "data"],
         )
-
+    
     export bea_api_datasets,
         bea_api_parameters,
         bea_api_parametervalues,

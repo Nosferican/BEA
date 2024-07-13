@@ -21,16 +21,16 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        julia-version: ['1.7']
+        julia-version: ['1.9']
         julia-arch: [x64]
-        os: [ubuntu-20.04]
+        os: [ubuntu-22.04]
     steps:
-      - uses: actions/checkout@v2
-      - uses: julia-actions/setup-julia@v1
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
         with:
           version: ${{ matrix.julia-version }}
       - name: Cache artifacts
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-artifacts
         with:
@@ -45,9 +45,11 @@ jobs:
         env:
           API_BEA_TOKEN: ${{ secrets.API_BEA_TOKEN }}
       - uses: julia-actions/julia-processcoverage@v1
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v4
         with:
           files: lcov.info
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - uses: julia-actions/julia-docdeploy@v1
         env:
           API_BEA_TOKEN: ${{ secrets.API_BEA_TOKEN }}

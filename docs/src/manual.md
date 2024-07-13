@@ -5,9 +5,8 @@
 We first load the module and assign the `UserID` (API token) to a variable.
 
 ```@example main
-using BEA, DataFrames
-const BEA_token = ENV["API_BEA_TOKEN"]
-nothing
+using BEA, DataFrames, Tidier
+const BEA_token = ENV["API_BEA_TOKEN"];
 ```
 
 ## Datasets
@@ -44,7 +43,8 @@ It takes a `tablename` and `year`. We can check which `tablename`s are valid usi
 faa_tbls = bea_api_parametervalues(
     BEA_token,
     "FixedAssets",
-    "tablename")
+    "tablename",
+    )
 first(faa_tbls, 6)
 ```
 
@@ -53,9 +53,7 @@ If we wanted to check whether some value is valid for some parameter conditional
 Say we want to get the investment on software in the private sector (line 78 in the Fixed Assets table 2.7).
 
 ```@example main
-subset(
-    faa_tbls,
-    :Description => ByRow(x -> occursin("Table 2.7", x)))
+@filter(faa_tbls, contains(Description, "Table 2.7"))
 ```
 
 We now know the `tablename` for the table of interest.
@@ -79,23 +77,16 @@ first(faa_tbl27_19_20, 6)
 Let us now get the estimates for investment in private software.
 
 ```@example main
-software = subset(
-    faa_tbl27_19_20,
-    :LineNumber => ByRow(isequal("78")))
+software = @filter(faa_tbl27_19_20, LineNumber == "78")
 ```
 
 ```@example main
-transform!(
+@select(
     software,
-    [:DataValue, :UNIT_MULT] .=> ByRow(x -> parse(Float64, x)),
-    renamecols = false
-    )
-select(
-    software,
-    :TimePeriod => ByRow(x -> parse(Int, x)) => :Year,
-    :DataValue => identity,
-    renamecols = false
-    )
+    series = SeriesCode,
+    year = as_integer(TimePeriod),
+    DataValue = as_integer(replace(DataValue, "," => "")) * 10^as_integer(UNIT_MULT)
+)
 ```
 
 !!! tip

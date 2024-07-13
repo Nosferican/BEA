@@ -1,7 +1,9 @@
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Tidier = "f0413319-3358-4bb0-8e7c-0c83523a93bd"
 
 [compat]
 DataFrames = "1"
 Documenter = "1"
+Tidier = "1"

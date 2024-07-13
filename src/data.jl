@@ -537,7 +537,7 @@ This dataset contains annual data on International Services Supplied Through Aff
 
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = IntlServSTA(channel = "Mofas", destination = "AllForeign", industry = "RetailTrade", year = 2015:2016)
-
+IntlServSTA("Mofas", "AllForeign", "RetailTrade", "AllCountries", "2015,2016")
 ```
 """
 struct IntlServSTA <: BEA_API_Datasets

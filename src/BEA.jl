@@ -40,5 +40,6 @@ module BEA
         InputOutput,
         UnderlyingGDPbyIndustry,
         IntlServTrade,
+        IntlServSTA,
         Regional
 end

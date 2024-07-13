@@ -1,7 +1,7 @@
 name = "BEA"
 uuid = "96b9c4de-1e81-4df7-ad57-b557e6deae22"
 authors = ["José Bayoán Santiago Calderón <Jose.Santiago-Calderon@bea.gov>"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"

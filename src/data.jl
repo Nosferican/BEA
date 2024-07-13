@@ -490,8 +490,6 @@ This dataset contains annual data on U.S. international trade in services.
 
 # Examples
 
-# Examples
-
 ```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
 julia> query = IntlServTrade(typeofservice = "AllTypesOfService", tradedirection = "Imports", areaorcountry = "Germany", year = 2017:2018)
 IntlServTrade("AllTypesOfService", "Imports", "ALL", "Germany", "2017,2018")
@@ -521,6 +519,46 @@ struct IntlServTrade <: BEA_API_Datasets
         areaorcountry = singleormultiplevals(areaorcountry)
         year = preprocess_year(year)
         new(typeofservice, tradedirection, affiliation, areaorcountry, year)
+    end
+end
+
+"""
+    IntlServSTA(;
+        channel::Union{AbstractString, AbstractVector{<:AbstractString}} = "ALL",
+        destination::Union{AbstractString, AbstractVector{<:AbstractString}} = "ALL",
+        industry::Union{AbstractString, AbstractVector{<:AbstractString}} = "ALL",
+        areaorcountry::Union{AbstractString, AbstractVector{<:AbstractString}} = "AllCountries",
+        year::Union{AbstractString, Integer, AbstractVector{<:Integer}} = "All"
+        ) -> IntlServSTA
+
+This dataset contains annual data on International Services Supplied Through Affiliates.
+
+# Examples
+
+```jldoctest; setup = :(using BEA; BEA_token = ENV["API_BEA_TOKEN"]; ENV["COLUMNS"] = 120; ENV["LINES"] = 30;)
+julia> query = IntlServSTA(channel = "Mofas", destination = "AllForeign", industry = "RetailTrade", year = 2015:2016)
+
+```
+"""
+struct IntlServSTA <: BEA_API_Datasets
+    Channel :: String
+    Destination :: String
+    Industry :: String
+    AreaOrCountry :: String
+    Year :: String
+    function IntlServSTA(;
+        channel::Union{AbstractString, AbstractVector{<:AbstractString}} = "ALL",
+        destination::Union{AbstractString, AbstractVector{<:AbstractString}} = "ALL",
+        industry::Union{AbstractString, AbstractVector{<:AbstractString}} = "ALL",
+        areaorcountry::Union{AbstractString, AbstractVector{<:AbstractString}} = "AllCountries",
+        year::Union{AbstractString, Integer, AbstractVector{<:Integer}} = "All",
+        )
+        channel = singleormultiplevals(channel)
+        destination = singleormultiplevals(destination)
+        industry = singleormultiplevals(industry)
+        areaorcountry = singleormultiplevals(areaorcountry)
+        year = preprocess_year(year)
+        new(channel, destination, industry, areaorcountry, year)
     end
 end
 

@@ -5,8 +5,9 @@
 We first load the module and assign the `UserID` (API token) to a variable.
 
 ```@example main
-using BEA, DataFrames, Tidier
+using BEA, TidierData
 const BEA_token = ENV["API_BEA_TOKEN"];
+nothing
 ```
 
 ## Datasets
